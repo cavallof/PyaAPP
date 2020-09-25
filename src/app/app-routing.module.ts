@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'turnos',
+    loadChildren: () => import('./turnos/turnos.module').then( m => m.TurnosPageModule)
+  },
 ];
 
 @NgModule({
