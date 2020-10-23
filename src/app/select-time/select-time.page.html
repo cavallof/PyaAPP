@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>select-time</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+<ion-item>
+  <ion-list>
+    <ion-radio-group name="Time" value="" (ionChange)='onChange($event)'>
+      <ion-list-header>
+        <ion-label>Elige una hora</ion-label>
+      </ion-list-header>
+      <ion-item>
+        <ion-label>16:30</ion-label>
+        <ion-radio value="16:30"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>17:00</ion-label>
+        <ion-radio value="17:00"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>17:30</ion-label>
+        <ion-radio value="17:30"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>18:00</ion-label>
+        <ion-radio value="18:00"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>18:30</ion-label>
+        <ion-radio value="18:30" disabled='true'></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>19:00</ion-label>
+        <ion-radio value="19:00"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>19:30</ion-label>
+        <ion-radio value="19:30"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+</ion-item>
+<ion-label>{{myapp.duration}}</ion-label>
+<ion-label>{{myapp.services}}</ion-label>
+<ion-button (click)="onClick()" expand="block" fill="clear" shape="round">
+  Click me
+</ion-button>
+</ion-content>

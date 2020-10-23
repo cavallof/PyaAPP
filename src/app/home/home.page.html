@@ -1,13 +1,18 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
+    <ion-title slot="start">
       PyA Salon Unisex
     </ion-title>
+        <ion-chip color="primary">
+          <ion-avatar>
+            <img [src]="userdata.photoURL" />
+          </ion-avatar>
+          <ion-label>{{ userdata.displayName }}</ion-label>
+        </ion-chip>   
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  
+<ion-content [fullscreen]="true">  
     <ion-slides pager="false" [options]="slideOptsOne">
       <ion-slide>
         <img src="../../assets/img/1.jpeg" alt="">
@@ -15,22 +20,12 @@
       <ion-slide>
         <img src="../../assets/img/2.jpeg" alt="">
       </ion-slide>
-    </ion-slides>
+    </ion-slides> 
     <ion-button 
-         type="submit" 
-         color="danger"
-         (click)="onLogin()" 
-         expand="block">
-           Login with Google
-        </ion-button>
-
-        <ion-item>
-          <ion-label>
-            <ion-avatar slot="left">
-              <img [src]="userdata.photoURL" /> 
-            </ion-avatar>
-            {{ userdata.displayName }}
-            <h3>{{ userdata.email }}</h3>
-          </ion-label>
-        </ion-item>
+  type="submit" 
+  color="success"
+  (click)="onClick()" 
+  expand="block">
+    Mis Turnos
+ </ion-button>       
 </ion-content>

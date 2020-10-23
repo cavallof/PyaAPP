@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { TurnosPageRoutingModule } from './turnos-routing.module';
+import { SelectServicePageRoutingModule } from './select-service-routing.module';
 
-import { TurnosPage } from './turnos.page';
+import { SelectServicePage } from './select-service.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TurnosPageRoutingModule
+    SelectServicePageRoutingModule
   ],
-  declarations: [TurnosPage]
+  declarations: [SelectServicePage]
 })
-export class TurnosPageModule {}
+export class SelectServicePageModule {}

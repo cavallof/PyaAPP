@@ -14,6 +14,11 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { firebaseConfig } from 'src/environments/environment';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+//Calendar Modules
+import { NgCalendarModule  } from 'ionic2-calendar';
+import { CalendarModalPageModule } from './calendar-modal/calendar-modal.module';
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -24,7 +29,9 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    AngularFireStorageModule],
+    AngularFireStorageModule,
+    NgCalendarModule,
+    CalendarModalPageModule],
   providers: [
     StatusBar,
     SplashScreen,
