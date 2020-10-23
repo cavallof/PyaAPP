@@ -1,7 +1,8 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, NavController } from '@ionic/angular';
 import { ok } from 'assert';
+import { Subscription } from 'rxjs';
 import { AppointmentService } from '../services/appointment.service';
 import { AuthService } from '../services/auth.service';
 import { Apppointment } from '../shared/appointment.interface';
@@ -15,7 +16,8 @@ export class CalendarModalPage implements AfterViewInit {
   modalReady = false;
   user$;
   app: Apppointment = {uid: null, services: [], duration: null, date: null};
- event;
+  subscription1: Subscription;
+  event;
   eventSource;
   calendar = {
     mode: 'month',
@@ -28,19 +30,20 @@ export class CalendarModalPage implements AfterViewInit {
     const current = new Date();
     console.log(current);
     return  ( date.getDay() === 1 || date.getDay() === 0
-    ||  date.getDate() < current.getDate()
-    || date.getTime() > (current.getTime() + 30 * 24 * 60 * 60 * 1000) || 
-    (date.getDate() + date.getMonth() === this.unavailableDays.getDate() + this.unavailableDays.getMonth())
+    ||  date.getTime() < current.getTime() - (24 * 60 * 60 * 1000)
+    || date.getTime() > ((current.getTime()) + 30 * 24 * 60 * 60 * 1000) //|| 
+    //(date.getDate() + date.getMonth() === this.unavailableDays.getDate() + this.unavailableDays.getMonth())
      ) ;
+     
   }
   constructor(private modalCtrl: ModalController, public alertController: AlertController,
-     private appServ: AppointmentService, private authServ: AuthService, private router: Router) { }
+     private appServ: AppointmentService, private authServ: AuthService, private router: Router, private navCtrl: NavController) { }
 
   ngOnInit() {
     const dia = new Date(1603497600 * 1000);
     this.unavailableDays = dia;
     console.log(dia.getDate());
-    this.appServ.currentApp.subscribe(val => {
+    this.subscription1 = this.appServ.currentApp.subscribe(val => {
       this.app = val;
       return this.app; });
   }
@@ -141,5 +144,14 @@ async presentAlertConfirm() {
     ]
   });
   await alert.present();
+}
+async onLogout(){
+ await this.authServ.logout().then(e=>{
+  this.navCtrl.navigateRoot('login');
+ });
+ 
+}
+goHome(){
+  this.navCtrl.navigateBack('home');
 }
 }

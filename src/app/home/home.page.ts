@@ -40,7 +40,7 @@ export class HomePage implements OnInit, OnDestroy {
     console.log('Error->', error);
    }
  }
- private onClick(){
+  onClick(){
   this.router.navigate(['/my-appointment']);
  }
 }

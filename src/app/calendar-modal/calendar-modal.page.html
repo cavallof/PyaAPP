@@ -21,7 +21,24 @@
   (onTitleChanged)="onViewTitleChanged($event)"
   (onTimeSelected)="onCurrentDateChanged($event)"
   [markDisabled]="markDisabled"
+  [showEventDetail] = "false"
   class="calendar">
 
 </calendar>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goHome()">
+        <ion-icon slot="start" name="home-outline"></ion-icon>
+        Inicio
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="onLogout()" >
+        <ion-icon slot="start" name="log-out-outline"></ion-icon>
+        Salir
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

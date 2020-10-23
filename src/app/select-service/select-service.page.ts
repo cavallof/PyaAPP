@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { element } from 'protractor';
 import { AppointmentService } from '../services/appointment.service';
 import { AuthService } from '../services/auth.service';
@@ -38,7 +39,7 @@ export class SelectServicePage implements OnInit {
     duration: 45
   }
 ];
-  constructor(private appServ: AppointmentService, private router: Router, private authServ: AuthService) { }
+  constructor(private appServ: AppointmentService, private router: Router, private authServ: AuthService, private navCtrl: NavController) { }
 
   ngOnInit() {
     this.authServ.user$.subscribe(val =>{
@@ -68,4 +69,14 @@ export class SelectServicePage implements OnInit {
   }
 
   compareWith = this.compareWithFn;
+
+  goHome(){
+    this.navCtrl.navigateBack('home');
+  }
+  async onLogout(){
+    
+   await this.authServ.logout().then(e=>{
+    this.navCtrl.navigateRoot('login');
+   });
+  }
 }

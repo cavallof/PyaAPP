@@ -30,7 +30,7 @@
       </ion-item>
       <ion-item>
         <ion-label>18:30</ion-label>
-        <ion-radio value="18:30" disabled='true'></ion-radio>
+        <ion-radio value="18:30" ></ion-radio>
       </ion-item>
       <ion-item>
         <ion-label>19:00</ion-label>
@@ -46,6 +46,22 @@
 <ion-label>{{myapp.duration}}</ion-label>
 <ion-label>{{myapp.services}}</ion-label>
 <ion-button (click)="onClick()" expand="block" fill="clear" shape="round">
-  Click me
+  Aceptar
 </ion-button>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goHome()">
+        <ion-icon slot="start" name="home-outline"></ion-icon>
+        Inicio
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="onLogout()" >
+        <ion-icon slot="start" name="log-out-outline"></ion-icon>
+        Salir
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

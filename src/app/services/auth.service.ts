@@ -5,6 +5,8 @@ import * as firebase from 'firebase/app';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { NavController } from '@ionic/angular';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,7 @@ export class AuthService {
 
   public user$: Observable<User>;
 
-  constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore) {
+  constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore, private navCtrl: NavController) {
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
         if (user){
@@ -45,7 +47,10 @@ export class AuthService {
 
  async logout(): Promise<void> {
    try{
-    await this.afAuth.signOut();
+    await this.afAuth.signOut()
+    // await this.afAuth.signOut().then(e => {      
+    //   this.navCtrl.navigateRoot('login');
+    // });
    } catch (error){
     console.log('Error:', error);
    }

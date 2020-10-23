@@ -1,7 +1,7 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { async } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { CalendarComponent } from 'ionic2-calendar/ionic2-calendar';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -18,7 +18,8 @@ import { User } from '../shared/user.interface';
 })
 export class SelectTimePage implements OnInit {
 
-  constructor(private modalCtrl: ModalController, private appServ: AppointmentService, private authServ: AuthService, private router: Router) { }
+  constructor(private modalCtrl: ModalController, private appServ: AppointmentService,
+     private authServ: AuthService, private router: Router, private navCtrl: NavController) { }
   private time;
   dateTemp: Date;
   myapp: Apppointment;
@@ -75,5 +76,13 @@ async onClick(){
   onChange(selectedValue) {
     this.time = selectedValue.detail.value;
   }
-
+  goHome(){
+    this.navCtrl.navigateBack('home');
+  }
+  async onLogout(){
+    
+   await this.authServ.logout().then(e=>{
+    this.navCtrl.navigateRoot('login');
+   });
+  }
 }

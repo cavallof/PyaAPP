@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
 import { AppointmentService } from '../services/appointment.service';
 import { AuthService } from '../services/auth.service';
 import { Apppointment } from '../shared/appointment.interface';
@@ -12,6 +13,7 @@ import { Apppointment } from '../shared/appointment.interface';
 export class MyAppointmentPage implements OnInit {
 private user;
 private time;
+
 myapp: Array<Apppointment> = [];
 
   constructor(private appServ: AppointmentService, private navCtrl: NavController, private authServ: AuthService) { }
@@ -30,20 +32,24 @@ myapp: Array<Apppointment> = [];
         data.forEach(e=>{
           return new Date(e.date);
         })
-            console.log(this.myapp);
+            //console.log(this.myapp);
         });
-      //return console.log(this.user);
-      
+            
     })
-    //this.time = new Date().getTime();
-    //console.log(this.time);
-    //console.log(this.user);
-    // this.appServ.getAppointment(this.user, this.time).subscribe( data  => {
-    // this.myapp = data;
-    //     console.log(this.myapp);
-    // });
+
   }
   onClick(){
 this.navCtrl.navigateForward('select-service');
 }
+goHome(){
+  this.navCtrl.navigateBack('home');
+}
+async onLogout(){
+  
+ await this.authServ.logout().then(e=>{
+  this.navCtrl.navigateRoot('login');
+ });
+}
+
+
 }
