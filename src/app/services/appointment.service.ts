@@ -13,13 +13,14 @@ import { AuthService } from './auth.service';
 })
 export class AppointmentService {
   myAppointment: Apppointment;
-  constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore) { }
+  constructor(private afs: AngularFirestore) { }
    public myapp = new BehaviorSubject(null);
    currentApp = this.myapp.asObservable();
    private date;
    private year;
    private month;
    private day;
+  // private idField;
   updateApp(app: Apppointment){
      this.myapp.next(app);
      console.log(this.myapp);
@@ -33,15 +34,17 @@ export class AppointmentService {
     const dataApp = this.myapp.value;
     this.afs.collection('appointments').add(dataApp);
   }
-  deleteAppointment(app: Apppointment){
-    //this.afs.doc().delete();
+  deleteAppointment(app){
+    this.afs.doc(`appointments/${app}`).delete();
   }
   updateAppointment(){}
-  getAppointment(user, time): Observable<Apppointment[]> {
-    return this.afs.collection<Apppointment>('appointments', ref => ref.where('date','>', time).where('uid', '==', user)).valueChanges();
+  getAppointment(user, time) {
+    //return this.afs.collection<Apppointment>('appointments', ref => ref.where('date','>', time).where('uid', '==', user)).valueChanges();
+    return this.afs.collection<Apppointment>('appointments', ref => ref.where('date','>', time).where('uid', '==', user)).snapshotChanges();
   }
   getTime(){
-     return this.afs.collection('appointments').snapshotChanges();
+    
+     return this.afs.collection<Apppointment>('appointments').snapshotChanges();
     }
 }
 

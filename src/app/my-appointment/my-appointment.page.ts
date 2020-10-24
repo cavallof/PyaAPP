@@ -13,8 +13,8 @@ import { Apppointment } from '../shared/appointment.interface';
 export class MyAppointmentPage implements OnInit {
 private user;
 private time;
-
-myapp: Array<Apppointment> = [];
+private test;
+myapp = [];
 
   constructor(private appServ: AppointmentService, private navCtrl: NavController, private authServ: AuthService) { }
 
@@ -23,18 +23,27 @@ myapp: Array<Apppointment> = [];
       this.user  = e.uid;
       this.time = new Date().getTime();
       this.appServ.getAppointment(this.user, this.time).subscribe( data  => {
-        this.myapp = data.map( e =>({
-          date: new Date(e.date),
-          uid: e.uid,
-          duration: e.duration,
-          services: e.services
+          this.myapp = data.map( e =>({
+          date: new Date(e.payload.doc.data().date),
+          uid: e.payload.doc.data().uid,
+          duration: e.payload.doc.data().duration,
+          services: e.payload.doc.data().services,
+          appId: e.payload.doc.id
         }));
-        data.forEach(e=>{
-          return new Date(e.date);
-        })
+        // data.forEach(e=>{
+        //   return new Date(e.date);
+        // })
             //console.log(this.myapp);
         });
-            
+         this.appServ.getTime().subscribe( data =>{
+          this.test = data.map( e=>{
+            const data = e.payload.doc.data();
+            const id = e.payload.doc.id;
+            return {data, id};
+          });
+          console.log(this.test);  
+         });
+          
     })
 
   }
@@ -50,6 +59,8 @@ async onLogout(){
   this.navCtrl.navigateRoot('login');
  });
 }
-
+cardClick(app){
+  this.appServ.deleteAppointment(app);
+}
 
 }

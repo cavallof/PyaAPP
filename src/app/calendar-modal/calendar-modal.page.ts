@@ -18,6 +18,7 @@ export class CalendarModalPage implements AfterViewInit {
   app: Apppointment = {uid: null, services: [], duration: null, date: null};
   subscription1: Subscription;
   event;
+  eventTemp;
   eventSource;
   calendar = {
     mode: 'month',
@@ -41,9 +42,8 @@ export class CalendarModalPage implements AfterViewInit {
 
   ngOnInit() {
     const dia = new Date(1603497600 * 1000);
-    this.unavailableDays = dia;
-    console.log(dia.getDate());
-    this.subscription1 = this.appServ.currentApp.subscribe(val => {
+    this.unavailableDays = dia;  
+    this.appServ.currentApp.subscribe(val => {
       this.app = val;
       return this.app; });
   }
@@ -62,56 +62,7 @@ export class CalendarModalPage implements AfterViewInit {
       this.event = event;
       this.presentAlertConfirm();
   }
-//   createRandomEvents() {
-//     var events = [];
-//     for (var i = 0; i < 50; i += 1) {
-//         var date = new Date();
-//         var eventType = Math.floor(Math.random() * 2);
-//         var startDay = Math.floor(Math.random() * 90) - 45;
-//         var endDay = Math.floor(Math.random() * 2) + startDay;
-//         var startTime;
-//         var endTime;
-//         if (eventType === 0) {
-//             startTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + startDay));
-//             if (endDay === startDay) {
-//                 endDay += 1;
-//             }
-//             endTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + endDay));
-//             events.push({
-//                 title: 'All Day - ' + i,
-//                 startTime: startTime,
-//                 endTime: endTime,
-//                 allDay: true
-//             });
-//         } else {
-//             var startMinute = Math.floor(Math.random() * 24 * 60);
-//             var endMinute = Math.floor(Math.random() * 180) + startMinute;
-//             startTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + startDay, 0, date.getMinutes() + startMinute);
-//             endTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + endDay, 0, date.getMinutes() + endMinute);
-//             events.push({
-//                 title: 'Event - ' + i,
-//                 startTime: startTime,
-//                 endTime: endTime,
-//                 allDay: false
-//             });
-//         }
-//     }
-//     return events;
-// }
-loadEvents() {
-  //this.eventSource = this.createRandomEvents();
-  this.eventSource = [{user:'123', title: 'Evento de Prueba', startTime: new Date(2020,9,15,15,30), endTime: new Date(2020,9,15,16,30)}]
-  var test = JSON.stringify(this.eventSource);
-  // this.eventSource = this.createStaticAllDayEvents();
-  //  let eventSource = this.createStaticNormalDayEvents();
-  //  let eventSource1 = this.createStaticNormalDayEvents2();
-  //  let eventSource2 = this.createStaticNormalDayEvents3();
-  //  this.eventSource = eventSource.concat(eventSource1).concat(eventSource2);
-  //  this.eventSource = this.createStaticCrossDayEvents();
-  console.log(this.eventSource);
-  console.log(test);
-  console.log(this.calendar.currentDate);
-}
+
 async presentAlertConfirm() {   
   const alert = await this.alertController.create({
     cssClass: 'my-custom-class',
@@ -136,7 +87,13 @@ async presentAlertConfirm() {
           this.app.date = this.event.selectedTime.getTime();
           //this.app.duration = 30;
           this.appServ.updateApp(this.app);
-          console.log(this.event);
+          // this.eventTemp={
+          //   title: this.app.services,
+          //   startTime: this.event.selectedTime,
+          //   endTime:this.event.selectedTime
+          // }
+          //this.eventSource.push(this.eventTemp)
+          //console.log(this.event);
           console.log('Confirm Okay');
           this.router.navigate(['/select-time']);
         }

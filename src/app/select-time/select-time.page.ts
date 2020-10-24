@@ -31,7 +31,7 @@ export class SelectTimePage implements OnInit {
   hour;
   minutes;
   user: User = { uid : null, photoURL : null, email : null, emailVerified : null, displayName : null };
-  private subscription: Subscription;
+ 
   ngOnInit() {
     this.testing = this.appServ.currentApp.subscribe(val => {
       this.myapp = val;
@@ -54,7 +54,7 @@ export class SelectTimePage implements OnInit {
 }
 async onClick(){
   try {
-    this.subscription = await this.authServ.user$.subscribe(val => {
+     await this.authServ.user$.subscribe(val => {
      this.user = val;
      this.dateTemp = new Date(this.myapp.date);
      this.year = this.dateTemp.getFullYear();

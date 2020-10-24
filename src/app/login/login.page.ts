@@ -18,7 +18,7 @@ export class LoginPage  {
     try{
       const user = await this.authSvc.loginGoogle();
       if (user) {
-        this.redirectUser();        
+        this.redirectUser(); 
       }
     } catch (error){
       console.log('Error:', error);
@@ -28,4 +28,5 @@ export class LoginPage  {
  private redirectUser(){
   this.router.navigate(['home']);
 }
+
 }
