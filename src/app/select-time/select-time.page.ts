@@ -37,20 +37,7 @@ export class SelectTimePage implements OnInit {
       this.myapp = val;
       return this.myapp;
     });
-    // this.appServ.getTime().subscribe( data => {
-    //   this.appData = data.map( e => {
-    //     return {
-    //       uid: e.payload.doc.data()['uid'],
-    //       services: e.payload.doc.data()['services'],
-    //       duration: e.payload.doc.data()['duration'],
-    //       date: e.payload.doc.data()['date']
-    //     }
-    //   });
     
-  //  this.appServ.getAppointment().subscribe( data => {
-  //  console.log(data);
-  //  });
-   
 }
 async onClick(){
   try {
@@ -66,7 +53,7 @@ async onClick(){
      console.log(this.time);
      this.appServ.updateApp(this.myapp); 
      this.appServ.createAppointment();
-     this.router.navigate(['/home']);
+     this.navCtrl.navigateForward('home');
    });
       } catch (error) {
    console.log('Error->', error);
@@ -80,7 +67,6 @@ async onClick(){
     this.navCtrl.navigateBack('home');
   }
   async onLogout(){
-    
    await this.authServ.logout().then(e=>{
     this.navCtrl.navigateRoot('login');
    });

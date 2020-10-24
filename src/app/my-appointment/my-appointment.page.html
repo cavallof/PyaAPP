@@ -12,7 +12,7 @@
 <ion-list *ngIf='myapp.length > 0'>
   <ion-card *ngFor="let item of myapp"> 
     <ion-card-header>
-     <ion-card-title>Mi Turno {{item.appId}}</ion-card-title>
+     <ion-card-title>Mi Turno</ion-card-title>
       <ion-card-subtitle><ion-item>
        <ion-label>Fecha:</ion-label>
        <ion-datetime display-format="DD.MM.YYYY HH:mm" value="{{item.date}}"></ion-datetime>
@@ -22,7 +22,6 @@
     </ion-card-header>
     <ion-card-content>
     <ion-button (click)="cardClick(item.appId)" expand="block" fill="solid" color="danger" shape="round">Borrar Turno</ion-button>
-
       <ion-card button (click)="cardClick(item.appId)"></ion-card>
     </ion-card-content>    
           
@@ -32,18 +31,6 @@
 <ion-button (click)="onClick()" expand="block" fill="solid" color="success" shape="round">
   Solicitar un Turno
 </ion-button>
-
- 
-<!-- <ion-tabs>
-
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="home">
-      <ion-icon name="home-outline"></ion-icon>
-      <ion-label>Inicio</ion-label>
-    </ion-tab-button>
- </ion-tab-bar>
-
-</ion-tabs> -->
 </ion-content>
 <ion-footer>
   <ion-toolbar>
